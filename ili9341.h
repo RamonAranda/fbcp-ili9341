@@ -2,6 +2,9 @@
 
 #if defined(ILI9341) || defined(ILI9340)
 
+#define GPIO_SPI0_MCU_M0   23
+#define GPIO_SPI0_MCU_M1   22
+#define GPIO_SPI0_MCU_M2   27
 // SPI_BUS_CLOCK_DIVISOR specifies how fast to communicate the SPI bus at. Possible values are 4, 6, 8, 10, 12, ... Smaller
 // values are faster. On my PiTFT 2.8 and Waveshare32b displays, divisor value of 4 does not work, and
 // 6 is the fastest possible. While developing, it was observed that a value of 12 or higher did not

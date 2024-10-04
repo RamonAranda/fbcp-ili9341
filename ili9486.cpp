@@ -20,6 +20,13 @@ void InitILI9486()
   SET_GPIO(GPIO_TFT_RESET_PIN);
   usleep(120 * 1000);
 #endif
+  // 011 enables 4-wire SPI mode
+  SET_GPIO_MODE(GPIO_SPI0_MCU_M0, 0x00); // Set SPI0_MCU_M0 to 0 to enable SPI0 master mode.
+  SET_GPIO(GPIO_SPI0_MCU_M0);
+  SET_GPIO_MODE(GPIO_SPI0_MCU_M1, 0x01); // Set SPI0_MCU_M1 to 1 to enable SPI0 master mode.
+  SET_GPIO(GPIO_SPI0_MCU_M1);
+  SET_GPIO_MODE(GPIO_SPI0_MCU_M2, 0x01); // Set SPI0_MCU_M2 to 1 to enable SPI0 master mode.
+  SET_GPIO(GPIO_SPI0_MCU_M2);
 
   // Do the initialization with a very low SPI bus speed, so that it will succeed even if the bus speed chosen by the user is too high.
   spi->clk = 34;

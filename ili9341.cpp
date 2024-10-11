@@ -9,6 +9,15 @@
 
 void InitILI9341()
 {
+  // 011 enables 4-wire SPI mode
+  SET_GPIO_MODE(GPIO_SPI0_MCU_M0, 0); // Set SPI0_MCU_M0 to 0 to enable SPI0 master mode.
+  CLEAR_GPIO(GPIO_SPI0_MCU_M0);
+  SET_GPIO_MODE(GPIO_SPI0_MCU_M1, 1); // Set SPI0_MCU_M1 to 1 to enable SPI0 master mode.
+  SET_GPIO(GPIO_SPI0_MCU_M1);
+  SET_GPIO_MODE(GPIO_SPI0_MCU_M2, 1); // Set SPI0_MCU_M2 to 1 to enable SPI0 master mode.
+  SET_GPIO(GPIO_SPI0_MCU_M2);
+  usleep(120 * 1000);
+
   // If a Reset pin is defined, toggle it briefly high->low->high to enable the device. Some devices do not have a reset pin, in which case compile with GPIO_TFT_RESET_PIN left undefined.
 #if defined(GPIO_TFT_RESET_PIN) && GPIO_TFT_RESET_PIN >= 0
   printf("Resetting display at reset GPIO pin %d\n", GPIO_TFT_RESET_PIN);
@@ -20,14 +29,6 @@ void InitILI9341()
   SET_GPIO(GPIO_TFT_RESET_PIN);
   usleep(120 * 1000);
 #endif
-  // 011 enables 4-wire SPI mode
-  SET_GPIO_MODE(GPIO_SPI0_MCU_M0, 0x00); // Set SPI0_MCU_M0 to 0 to enable SPI0 master mode.
-  SET_GPIO(GPIO_SPI0_MCU_M0);
-  SET_GPIO_MODE(GPIO_SPI0_MCU_M1, 0x01); // Set SPI0_MCU_M1 to 1 to enable SPI0 master mode.
-  SET_GPIO(GPIO_SPI0_MCU_M1);
-  SET_GPIO_MODE(GPIO_SPI0_MCU_M2, 0x01); // Set SPI0_MCU_M2 to 1 to enable SPI0 master mode.
-  SET_GPIO(GPIO_SPI0_MCU_M2);
-  usleep(120 * 1000);
 
   // Do the initialization with a very low SPI bus speed, so that it will succeed even if the bus speed chosen by the user is too high.
   spi->clk = 34;
